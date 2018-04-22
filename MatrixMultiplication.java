@@ -2,9 +2,9 @@ package com.daa.project;
 
 import java.util.Scanner;
 
-public class MatrixGenerator {
+public class MatrixMultiplication {
 
-	public MatrixGenerator() {
+	public MatrixMultiplication() {
 
 	}
 
@@ -32,27 +32,43 @@ public class MatrixGenerator {
 		long stop = System.nanoTime();
 
 		long totalTime = stop - start;
-		System.out.println();
-		System.out.println("Time to generate Matrix in Nano Second\t " + totalTime + " ns");
 
+		// Printing returned matrix
+		System.out.println("The random Matrix is generated for " + row + " rows and  " + column + " columns \nand is printed as below");
+		System.out.println();
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				System.out.printf("%-5d", matrix[i][j]);
+			}
+			System.out.println();
+		}
+
+		
+		System.out.println();
+		System.out.println("Time to generate " + row + " X " + column + " Matrix in Nano Second is " + totalTime + " ns");
+		
+		
+	
 		scan.close();
 
 	}
 
 	/**
-	 * Takes 2D empty matrix to fill values in rows and column
+	 * Takes 2D empty matrix to fill values in rows and column and return the
+	 * generated matrix
 	 * 
 	 * @param matrix
+	 * @return
 	 */
-	public static void generateMatrix(int[][] matrix) {
+	public static int[][] generateMatrix(int[][] matrix) {
 		for (int x = 0; x < matrix.length; x++) {
 			for (int Y = 0; Y < matrix[x].length; Y++) {
 				matrix[x][Y] = (int) (Math.random() * 10);
-				System.out.printf("%-5d", matrix[x][Y]);
+
 			}
-			System.out.println();
-			
+
 		}
+		return matrix;
 	}
 
 }
