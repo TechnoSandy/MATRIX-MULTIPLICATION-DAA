@@ -96,7 +96,7 @@ public class LargeNumberMultiplicationKaratsuba {
 	public static BigInteger karatsubaBigInteger(BigInteger first, BigInteger second) {
 
 		int N = Math.max(first.bitLength(), second.bitLength());
-		System.out.println("N " + N);
+		
 		// If less than 9 we can directly multiply i.e we cannot further divide the
 		// number in halves
 		if (N <= 10) {
