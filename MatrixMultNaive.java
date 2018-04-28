@@ -1,10 +1,16 @@
 package com.daa.project;
 
+
+/**
+ * This Class multiply  Matrix of random row and columns
+ * in traditional method or Naive method
+ * 
+ */
 import java.util.Scanner;
 
-public class MatrixMultiplication {
+public class MatrixMultNaive {
 
-	public MatrixMultiplication() {
+	public MatrixMultNaive() {
 
 	}
 
@@ -35,7 +41,7 @@ public class MatrixMultiplication {
 		// Calculating time to generate matrix
 		long start = System.nanoTime();
 		// Call matrix generator method to generate random matrix
-		generateMatrix(matrix1);
+		MatrixGenerator.generateMatrix(matrix1);
 		long stop = System.nanoTime();
 
 		long totalTime = stop - start;
@@ -72,7 +78,7 @@ public class MatrixMultiplication {
 		int[][] result = new int[row][column];
 		
 		long multiplication_start = System.nanoTime();
-		matrixMultiplicationTraditional(row, column, matrix1, matrix2, result);
+		NaiveMultiplication(row, column, matrix1, matrix2, result);
 		long multiplication_end = System.nanoTime();
 		long totalTime_Multiplication = multiplication_end - multiplication_start;
 
@@ -100,7 +106,7 @@ public class MatrixMultiplication {
 	 * @param matrix2
 	 * @param result
 	 */
-	public static void matrixMultiplicationTraditional(int row, int column, int[][] matrix1, int[][] matrix2,
+	public static void NaiveMultiplication(int row, int column, int[][] matrix1, int[][] matrix2,
 			int[][] result) {
 		int sum = 0;
 		for (int i = 0; i < row; i++) {
@@ -118,24 +124,6 @@ public class MatrixMultiplication {
 			}
 
 		}
-	}
-
-	/**
-	 * Takes 2D empty matrix to fill values in rows and column and return the
-	 * generated matrix
-	 * 
-	 * @param matrix
-	 * @return
-	 */
-	public static int[][] generateMatrix(int[][] matrix) {
-		for (int x = 0; x < matrix.length; x++) {
-			for (int Y = 0; Y < matrix[x].length; Y++) {
-				matrix[x][Y] = (int) (Math.random() * 10);
-
-			}
-
-		}
-		return matrix;
 	}
 
 }
