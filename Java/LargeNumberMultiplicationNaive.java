@@ -4,7 +4,6 @@
 package com.daa.project;
 
 import java.math.BigInteger;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -34,7 +33,6 @@ public class LargeNumberMultiplicationNaive {
 		// calculate multiplication
 		Scanner Scan = new Scanner(System.in);
 		System.out.println("Enter the digit in decimal");
-		Random r = new Random();
 		int power_of_two = Scan.nextInt();
 		if (power_of_two < 32) {
 			first = (long) Math.pow(2, power_of_two);
@@ -55,15 +53,15 @@ public class LargeNumberMultiplicationNaive {
 			System.out.println("You have entered 2^" + power_of_two);
 			System.out.println("First Number :" + first);
 			System.out.println("Second Number :" + second);
-			multiplyNaive(first, second);
+			System.out.println("Multiplication : "+multiplyNaive(first, second));
 		}
 
 		else {
 			System.out.println("Order is very large we will calculate with BigInteger");
 			System.out.println("You have entered 2^" + power_of_two);
-			System.out.println(firstNumber);
-			System.out.println(secondNumber);
-			System.out.println(firstNumber.multiply(secondNumber));
+			System.out.println("First Number :"+firstNumber);
+			System.out.println("Second Number :"+secondNumber);
+			System.out.println("Multiplication :"+firstNumber.multiply(secondNumber));
 		}
 		Scan.close();
 
@@ -72,8 +70,9 @@ public class LargeNumberMultiplicationNaive {
 	/**
 	 * @param first
 	 * @param second
+	 * @return
 	 */
-	public static void multiplyNaive(long first, long second) {
+	public static long multiplyNaive(long first, long second) {
 		long product = 0;
 		long temp, Count = 0;
 		do {
@@ -82,7 +81,7 @@ public class LargeNumberMultiplicationNaive {
 			second = second / 10;
 			Count++;
 		} while (second > 0);
-		System.out.println("product :" + product);
+		return product;
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.daa.project;
 
-
 /**
  * This Class multiply  Matrix of random row and columns
  * in traditional method or Naive method
@@ -50,7 +49,7 @@ public class MatrixMultNaive {
 		System.out.println("The random Matrix is generated for " + row + " rows and  " + column
 				+ " columns \nand is printed as below");
 		System.out.println();
-		
+
 		// Printing randomly generated matrix
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
@@ -60,7 +59,8 @@ public class MatrixMultNaive {
 		}
 
 		System.out.println();
-		System.out.println("Time to generate " + row + " X " + column + " Matrix in Nano Second is " + totalTime + " ns");
+		System.out
+				.println("Time to generate " + row + " X " + column + " Matrix in Nano Second is " + totalTime + " ns");
 
 		/*
 		 * Calculating the product of Matrix Normal Approch ( Traditional Way of
@@ -76,7 +76,7 @@ public class MatrixMultNaive {
 		 * matrix2
 		 */
 		int[][] result = new int[row][column];
-		
+
 		long multiplication_start = System.nanoTime();
 		NaiveMultiplication(row, column, matrix1, matrix2, result);
 		long multiplication_end = System.nanoTime();
@@ -100,21 +100,21 @@ public class MatrixMultNaive {
 
 	/**
 	 * This method use traditional way to multiply Matrix
+	 * 
 	 * @param row
 	 * @param column
 	 * @param matrix1
 	 * @param matrix2
 	 * @param result
 	 */
-	public static void NaiveMultiplication(int row, int column, int[][] matrix1, int[][] matrix2,
-			int[][] result) {
+	public static void NaiveMultiplication(int row, int column, int[][] matrix1, int[][] matrix2, int[][] result) {
 		int sum = 0;
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
 				/*
 				 * m value depends on the number of column in the first matrix or rows in the
 				 * second matrix https://www.youtube.com/watch?v=7kZDlUTct9k
-				 */				
+				 */
 				for (int m = 0; m < column; m++) {
 					sum = sum + matrix1[i][m] * matrix2[m][j];
 				}

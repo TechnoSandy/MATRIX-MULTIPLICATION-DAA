@@ -35,4 +35,11 @@ public class LargeNumberGenerator {
 		return l;
 
 	}
+	
+	
+	
+	public static void main(String[] args) {
+		System.out.println("largeNumberGenerator() : "+largeNumberGenerator());
+		System.out.println("generateLong() : "+generateLong());
+	}
 }

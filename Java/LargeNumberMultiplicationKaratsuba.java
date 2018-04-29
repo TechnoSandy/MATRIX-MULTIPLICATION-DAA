@@ -71,32 +71,13 @@ public class LargeNumberMultiplicationKaratsuba {
 	 * @param first
 	 * @param second
 	 * @return long
-	 * 
-	 *         x=5678 y=1234
-	 * 
-	 *         a=56,b=78
-	 * 
-	 *         c=12,d=34
-	 * 
-	 *         step 0 = m = n/2 + n%2
-	 * 
-	 *         step 1 = a*c
-	 * 
-	 *         step 2 = b*d
-	 * 
-	 *         step 3 = (a + b)*(c + d)
-	 * 
-	 *         step 4 = 3) - 2) - 1)
-	 * 
-	 *         step 5 = 1)*Math.pow(10, m*2) + 2) + 4)*Math.pow(10, m)
-	 * 
 	 */
 	// Reference for theory:https://www.youtube.com/watch?v=JCbZayFr9RE
 
 	public static BigInteger karatsubaBigInteger(BigInteger first, BigInteger second) {
 
 		int N = Math.max(first.bitLength(), second.bitLength());
-		
+
 		// If less than 9 we can directly multiply i.e we cannot further divide the
 		// number in halves
 		if (N <= 10) {
@@ -110,42 +91,44 @@ public class LargeNumberMultiplicationKaratsuba {
 		// x = a + 2^N b, y = c + 2^N d
 		// IMP NOTE : RtSHift = Divide and LtShift = Multiply
 		// Reference: https://www.youtube.com/watch?v=JCbZayFr9RE&t=290s
-		BigInteger b = first.shiftRight(N);
-		BigInteger a = first.subtract(b.shiftLeft(N));
-		BigInteger d = second.shiftRight(N);
-		BigInteger c = second.subtract(d.shiftLeft(N));
+		BigInteger B = first.shiftRight(N);
+		BigInteger A = first.subtract(B.shiftLeft(N));
+		BigInteger D = second.shiftRight(N);
+		BigInteger C = second.subtract(D.shiftLeft(N));
 
 		// compute sub-expressions
-		BigInteger ac = karatsubaBigInteger(a, c);
-		BigInteger bd = karatsubaBigInteger(b, d);
-		BigInteger abcd = karatsubaBigInteger(a.add(b), c.add(d));
+		BigInteger AC = karatsubaBigInteger(A, C);
+		BigInteger BD = karatsubaBigInteger(B, D);
+		BigInteger ABCD = karatsubaBigInteger(A.add(B), C.add(D));
 
-		return ac.add(abcd.subtract(ac).subtract(bd).shiftLeft(N)).add(bd.shiftLeft(2 * N));
+		return AC.add(ABCD.subtract(AC).subtract(BD).shiftLeft(N)).add(BD.shiftLeft(2 * N));
 
 	}
 
 	public static long karatsubaLong(long first, long second) {
 
 		// If less than 9 we can directly multiply
-		if (first < 10 || second < 10)
-			return first * second;
-		double max_length = Long.toString((Math.max(first, second))).length();
-		if (max_length % 2 == 1)
-			max_length++;
-		long a = (long) (first / Math.pow(10, (max_length / 2)));
+		if (first < 10 || second < 10) {
+			return LargeNumberMultiplicationNaive.multiplyNaive(first, second);
+		}
+		double lengthOfNumber = Long.toString((Math.max(first, second))).length();
+		// Check if the number is even length
+		if (lengthOfNumber % 2 == 1)
+			lengthOfNumber++;
+		long A = (long) (first / Math.pow(10, (lengthOfNumber / 2)));
 
-		long b = (long) (first % Math.pow(10, (max_length / 2)));
+		long B = (long) (first % Math.pow(10, (lengthOfNumber / 2)));
 
-		long c = (long) (second / Math.pow(10, (max_length / 2)));
+		long C = (long) (second / Math.pow(10, (lengthOfNumber / 2)));
 
-		long d = (long) (second % Math.pow(10, (max_length / 2)));
+		long D = (long) (second % Math.pow(10, (lengthOfNumber / 2)));
 
-		long first_half = karatsubaLong(a, c);
-		long middle_half = karatsubaLong(b, d);
-		long last_half = karatsubaLong(a + b, c + d);
+		long AC = karatsubaLong(A, C);
+		long BD = karatsubaLong(B, D);
+		long ABCD = karatsubaLong(A + B, C + D);
 
-		return ((long) ((first_half * Math.pow(10, max_length))
-				+ ((last_half - first_half - middle_half) * Math.pow(10, (max_length / 2))) + middle_half));
+		return ((long) ((AC * Math.pow(10, lengthOfNumber)) + ((ABCD - AC - BD) * Math.pow(10, (lengthOfNumber / 2)))
+				+ BD));
 	}
 
 }
